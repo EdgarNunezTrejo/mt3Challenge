@@ -106,8 +106,21 @@ const Pendings = ()=>{
         setPendings(items)
 
     }
+    const [asc,setSort] = useState(0)
+    const sortPendings=()=>{
+        const items = pendings.sort((a,b)=>{
+            return !asc?new Date(b.dueDate) - new Date(a.dueDate):new Date(a.dueDate) - new Date(b.dueDate);
+        })
+        setSort(!asc)
+        setPendings(items)
+    }
     return(
         <Content>
+            <Row gutter={[16, 16]} className={style.rowMargin}>
+                <Col span={24}>
+                    <button className={style.sortPendings} onClick={sortPendings}>Order date {asc?'ASC':'DESC'}</button>
+                </Col>
+            </Row>
             <Row gutter={[16, 16]} className={style.rowMargin}>
                 <DragDropContext onDragEnd={dragEndHandler}>
                     <Droppable droppableId='pendings'>

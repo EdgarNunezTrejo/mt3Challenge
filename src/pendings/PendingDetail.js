@@ -9,7 +9,8 @@ const PendingDetail = ({info, index, handler,setCounters,counters,setPendings})=
     const [manana,setManana] = useState(false)
     useEffect(()=>{
         const tomorrow = moment().add(1,'days').format('YYYY-MM-DD')
-        if(moment(tomorrow).isSame(pendInfo.dueDate)){
+        const today = moment().format('YYYY-MM-DD')
+        if(moment(tomorrow).isSame(pendInfo.dueDate)||moment(today).isSame(pendInfo.dueDate)){
             setManana(true)
         }
     },[])
